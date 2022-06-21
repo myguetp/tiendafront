@@ -49,7 +49,7 @@
                         <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
                          aria-expanded="false">Opciones</button>
                          <div class="dropdown-menu">
-                          <a class="dropdown-item" >Editar Cliente</a>
+                          <a class="dropdown-item" [routerLink]="['/panel/clientes',item._id]" >Editar Cliente</a>
                           <a class="dropdown-item" >Elimina Cliente</a>
                          </div>
                       </div>
