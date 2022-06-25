@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-
+import { NgxTinymceModule } from 'ngx-tinymce';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,9 @@ import { IndexClienteComponent } from './components/clientes/index-cliente/index
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateClienteComponent } from './components/clientes/create-cliente/create-cliente.component';
 import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cliente.component';
+import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
+import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cl
     LoginComponent,
     IndexClienteComponent,
     CreateClienteComponent,
-    EditClienteComponent
+    EditClienteComponent,
+    CreateProductoComponent,
+    IndexProductoComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,10 @@ import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cl
     //HttpClient,
     HttpClientModule,
     routing,
-    NgbModule
+    NgbModule,
+    NgxTinymceModule.forRoot({
+      "baseURL": "../../../assets/tinymce/"
+    })
 
 
   ],
