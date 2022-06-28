@@ -15,8 +15,9 @@
       <div class="card-header">
         <div class="input-group">
 
-            <input class="form-control " type="text" placeholder="Ritulo del producto">
-            <button class="btn btn-primary" type="button">Filtrar</button>
+            <input class="form-control " type="text" placeholder="Titulo del producto" name="filtro" [(ngModel)]="filtro">
+            <button class="btn btn-primary" type="button" (click)="filtrar()">Filtrar</button>
+            <button class="btn btn-dark" type="button" (click)="resetear()">Resetear</button>
 
         </div>
       </div>
@@ -25,7 +26,6 @@
               <table class="table table-bordered">
                 <thead class="thead-dark">
                   <tr>
-                    <th>#</th>
                     <th>Titulo</th>
                     <th>Stock</th>
                     <th>Precio</th>
@@ -45,17 +45,40 @@
                 </tbody>
 
                 <ng-container *ngIf="!load_data">
+                  <tbody *ngFor="let item of productos | slice:(page - 1)*pageSize : (page-1) * pageSize + pageSize">
+                    <tr>
+                      <td>
+                        <h6 style="padding-bottom: 0; margin-bottom: 0;">
+                          <img style="width:50px" [src]="url+'obtener_portada/'+item.portada" alt="Square image">
+                          {{item.titulo}}
+                        </h6>
+                      </td>
+                      <td>{{item.stock}}</td>
+                      <td>{{item.precio}}</td>
+                      <td>{{item.categorias}}</td>
+                      <td>{{item.nventas}}</td>
+                      <td>
+                        <div class="btn-group dropdown d-inline-block mb-3 me-2">
+                          <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">Opciones</button>
+                           <div class="dropdown-menu">
+                            <a class="dropdown-item" [routerLink]="['/panel/productos',item._id]">Editar Producto</a>
 
+                           </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
                 </ng-container>
 
               </table>
           </div>
       </div>
       <div class="card-footer">
-     <!--   <ngb-pagination
+       <ngb-pagination
         [(page)]="page"
         [pageSize]="pageSize"
-        [collectionSize]="clientes.length"
-      ></ngb-pagination>-->
+        [collectionSize]="productos.length"
+      ></ngb-pagination>
       </div>
 </div>
