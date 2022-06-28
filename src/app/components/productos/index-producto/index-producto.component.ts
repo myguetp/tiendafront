@@ -3,6 +3,8 @@ import { AdminService } from 'src/app/service/admin.service';
 import { GLOBAL } from 'src/app/service/GLOBAL';
 import { ProductoService } from 'src/app/service/producto.service';
 declare var iziToast:any;
+declare let jQuery:any;
+declare let $:any;
 
 @Component({
   selector: 'app-index-producto',
@@ -20,6 +22,8 @@ export class IndexProductoComponent implements OnInit {
   //paginación
   public page = 1;
   public pageSize = 20;
+
+  public load_btn= false;
 
   constructor(
     //injectar servicio
@@ -83,5 +87,40 @@ export class IndexProductoComponent implements OnInit {
     this.filtro = '';
     this.init_data();
   }
+  //eliminar
+  eliminar(id:any){
+    this.load_btn=true;
+    this._productoService.eliminar_producto_admin(id,this.token).subscribe(
+      response =>{
+        iziToast.show({
+          title: 'SUCCESS',
+          titleColor: '#FF0000',
+          color: '#1DC74C',
+          class:'text-success',
+          position: 'topRight',
+          message: 'se elimino correctamente el producto.'
+        });
+
+        $('#delete-'+id).modal('hide');
+        $('.modal-backdrop').removeClass('show');
+
+        this.load_btn = false;
+        this.init_data();
+      },
+      error=>{
+        iziToast.show({
+          title: 'ERROR',
+          titleColor: '#FF0000',
+          color: '#1DC74C',
+          class:'text-danger',
+          position: 'topRight',
+          message: 'Ocurrio error en el servidor.'
+        });
+        this.load_btn = false;
+        console.log(error);
+      }
+    )
+  }
+
 
 }
