@@ -27,7 +27,20 @@
           <h5 style="margin-bottom: 0px;">Inventario de {{producto.titulo}}</h5>
       </div>
       <div class="card-header">
+        <div class="row">
+          <form #inventarioForm="ngForm" (ngSubmit)="registro_inventario(inventarioForm)" class="form-line">
+            <label class="sr-only">Cantidad</label>
+            <input required class="form-control mb-3 mr-sm-4" type="text" placeholder="Cantidad" name="cantidad" [(ngModel)]="inventario.cantidad">
 
+            <label class="sr-only">Proveedor</label>
+            <input required class="form-control mb-3 mr-sm-4" type="text" placeholder="Proveedor" name="proveedor" [(ngModel)]="inventario.proveedor">
+
+
+
+            <button class="btn btn-primary mb-3" type="submit">Ingresar</button>
+          </form>
+
+        </div>
       </div>
       <div class="card-body">
           <div class="table-responsive">
