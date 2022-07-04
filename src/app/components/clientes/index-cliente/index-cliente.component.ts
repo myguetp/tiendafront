@@ -94,7 +94,7 @@ export class IndexClienteComponent implements OnInit {
           color: '#1DC74C',
           class:'text-success',
           position: 'topRight',
-          message: 'se elimino correctamente nuevo cliente.'
+          message: 'se elimino correctamente cliente.'
         });
 
         $('#delete-'+id).modal('hide');
