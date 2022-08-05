@@ -44,6 +44,11 @@ export class AdminService {
 
       console.log(decodedToken);
 
+      if(helper.isTokenExpired(token)){
+        localStorage.clear();
+        return false;
+      }
+
       if (!decodedToken) {
         localStorage.removeItem('token');
         return false;
@@ -55,5 +60,34 @@ export class AdminService {
     }
 
     return allowRoles.includes(decodedToken['role']);
+  }
+
+  /***CONFIG ****/
+
+  actualiza_cofig_admin(id:any,data:any,token:any):Observable<any>{
+
+    if(data.logo){
+      let headers = new HttpHeaders({'Authorization':token});
+
+    const fd = new FormData();
+    fd.append('titulo',data.titulo);
+    fd.append('serie',data.titulo);
+    fd.append('correlativo',data.correlativo);
+    fd.append('categorias',JSON.stringify(data.categorias));
+    fd.append('logo',data.logo);
+
+    return this._http.put(this.url+'actualiza_cofig_admin/'+id,fd,{headers:headers});
+
+    }else{
+      let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+      return this._http.put(this.url+'actualiza_cofig_admin/'+id,data,{headers:headers});
+    }
+
+  }
+
+
+  obtener_config_admin(token:any):Observable<any>{
+    let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
+    return this._http.get(this.url+'obtener_config_admin',{headers:headers});
   }
 }

@@ -59,7 +59,6 @@ export class ProductoService {
     }else{
       let headers = new HttpHeaders({'Content-Type':'application/json','Authorization':token});
       return this._http.put(this.url+'actualizar_producto_admin/'+id,data,{headers:headers});
-
     }
 
   }
